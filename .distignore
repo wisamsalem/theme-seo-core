@@ -1,0 +1,17 @@
+.git
+.github
+.gitignore
+.gitattributes
+.idea
+node_modules
+vendor
+tests
+phpunit.xml*
+phpcs.xml*
+*.log
+*.md
+README*
+composer.lock
+package-lock.json
+.DS_Store
+

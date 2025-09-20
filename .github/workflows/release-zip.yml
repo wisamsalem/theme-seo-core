@@ -1,0 +1,80 @@
+name: Build Lite ZIP
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-zip:
+    runs-on: ubuntu-latest
+    outputs:
+      zip_path: ${{ steps.zip.outputs.path }}
+      zip_name: ${{ env.ZIP_NAME }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set env
+        run: |
+          echo "PLUGIN_SLUG=theme-seo-core" >> $GITHUB_ENV
+          echo "ZIP_NAME=theme-seo-core-lite-${GITHUB_REF_NAME}.zip" >> $GITHUB_ENV
+
+      - name: Prepare build dir
+        run: |
+          mkdir -p build/${PLUGIN_SLUG}
+          rsync -av . build/${PLUGIN_SLUG} \
+            --exclude ".git*" \
+            --exclude ".github" \
+            --exclude "node_modules" \
+            --exclude "tests" \
+            --exclude "*.log" \
+            --exclude ".DS_Store" \
+            --exclude "package-lock.json" \
+            --exclude "composer.lock" \
+            --exclude "phpunit.xml*" \
+            --exclude "phpcs.xml*" \
+            --exclude ".editorconfig" \
+            --exclude ".gitignore" \
+            --exclude ".gitattributes" \
+            --exclude ".distignore" \
+            --exclude "vendor" \
+            --exclude ".idea" \
+            --exclude "README.md"
+
+      - name: Zip
+        id: zip
+        working-directory: build
+        run: |
+          zip -r "${ZIP_NAME}" "${PLUGIN_SLUG}"
+          echo "path=$(pwd)/${ZIP_NAME}" >> $GITHUB_OUTPUT
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ZIP_NAME }}
+          path: ${{ steps.zip.outputs.path }}
+          if-no-files-found: error
+
+  release:
+    needs: build-zip
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+
+      - name: Upload ZIP to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ needs.build-zip.outputs.zip_path }}
+

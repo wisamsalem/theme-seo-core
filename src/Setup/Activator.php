@@ -38,7 +38,6 @@ class Activator {
 		self::create_tables();
 		self::schedule_events();
 
-		// New: make sure rewrites are fresh (useful if modules add rules later).
 		flush_rewrite_rules();
 
 		if ( is_multisite() ) restore_current_blog();
@@ -58,7 +57,7 @@ class Activator {
 
 		// Title separator: prefer 'sep', fallback to legacy 'separator', then '–'.
 		$sep = $opts['sep'] ?? ( $opts['separator'] ?? '–' );
-		$opts['sep']       = is_string( $sep ) ? mb_substr( $sep, 0, 3 ) : '–';
+		$opts['sep'] = is_string( $sep ) ? mb_substr( $sep, 0, 3 ) : '–';
 		// Keep legacy key in place if it was used previously (harmless duplicate).
 		if ( isset( $opts['separator'] ) && ! is_string( $opts['separator'] ) ) {
 			unset( $opts['separator'] );
@@ -85,10 +84,14 @@ class Activator {
 	}
 
 	/**
-	 * Grant baseline capabilities to administrator.
+	 * Grant baseline capabilities to administrator if a custom cap is used.
+	 * Skips when manage_seo() == 'manage_options'.
 	 */
 	protected static function ensure_caps(): void {
-		$cap  = Capabilities::manage_seo(); // e.g., 'manage_tsc_seo'
+		$cap = Capabilities::manage_seo();
+		if ( $cap === 'manage_options' ) {
+			return; // nothing to add; admins already have it
+		}
 		$role = get_role( 'administrator' );
 		if ( $role && ! $role->has_cap( $cap ) ) {
 			$role->add_cap( $cap );

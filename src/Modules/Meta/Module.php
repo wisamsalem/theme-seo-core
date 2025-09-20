@@ -2,16 +2,14 @@
 namespace ThemeSeoCore\Modules\Meta;
 
 use ThemeSeoCore\Support\BaseModule;
-use ThemeSeoCore\Support\Options;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 /**
- * Meta Module
- *
- * Prints <meta name="description"> and <meta name="robots"> into the head.
+ * Meta Module (title helpers, meta description, robots).
+ * Hooks are wired only when enabled() returns true.
  */
 class Module extends BaseModule {
 
@@ -19,44 +17,58 @@ class Module extends BaseModule {
 	protected static $title = 'Meta';
 	protected static $description = 'Meta description and robots directives.';
 
-	/** @var Options */
-	protected $options;
-
-	/** @var MetaGenerator */
-	protected $generator;
-
 	public function register( \ThemeSeoCore\Container\Container $container ): void {
 		parent::register( $container );
-		$this->options   = new Options( 'tsc_settings' );
-		$this->generator = new MetaGenerator( $this->options );
+
+		// Respect settings/compatibility.
+		if ( ! $this->enabled() ) {
+			return;
+		}
+
 		$this->register_hooks();
 	}
 
 	protected function hooks(): array {
 		return [
-			// Prefer our internal head bus if present:
-			'theme_seo/head/meta' => [ [ $this, 'render_meta_tags' ], 10, 0, 'action' ],
-			// Fallback to wp_head if the head bus isn't used:
-			'wp_head'             => [ [ $this, 'render_meta_tags' ], 10, 0, 'action' ],
+			'wp_head' => [ [ $this, 'render' ], 1 ],
 		];
 	}
 
 	/**
-	 * Echo meta tags safely.
+	 * Render meta description + basic robots fallback.
+	 * If a dedicated MetaGenerator exists in the repo, prefer that.
 	 */
-	public function render_meta_tags(): void {
+	public function render(): void {
+		// Double-guard in case settings flip mid-request.
 		if ( ! $this->enabled() ) {
 			return;
 		}
 
-		$desc   = $this->generator->description_for_current();
-		$robots = $this->generator->robots_for_current();
-
-		if ( $desc !== '' ) {
-			echo '<meta name="description" content="' . esc_attr( $desc ) . '">' . "\n";
+		// Prefer the project's generator if present.
+		if ( class_exists( __NAMESPACE__ . '\\MetaGenerator' ) ) {
+			/** @var MetaGenerator $gen */
+			$gen = new MetaGenerator();
+			$gen->output();
+			return;
 		}
-		if ( $robots !== '' ) {
-			echo '<meta name="robots" content="' . esc_attr( $robots ) . '">' . "\n";
+
+		// Minimal fallback: try to build a description for singular content.
+		if ( is_singular() ) {
+			$desc = '';
+			$post = get_queried_object();
+			if ( $post && isset( $post->post_content ) ) {
+				$raw  = has_excerpt( $post ) ? get_the_excerpt( $post ) : wp_strip_all_tags( (string) $post->post_content );
+				$desc = trim( preg_replace( '/\s+/', ' ', wp_html_excerpt( $raw, 155, '…' ) ) );
+			}
+			if ( $desc !== '' ) {
+				printf( "<meta name=\"description\" content=\"%s\" />\n", esc_attr( $desc ) );
+			}
+		}
+
+		// Basic robots fallback (real logic should live in MetaGenerator).
+		if ( is_search() || is_404() ) {
+			echo "<meta name=\"robots\" content=\"noindex,follow\" />\n";
 		}
 	}
 }
+
