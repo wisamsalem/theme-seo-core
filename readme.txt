@@ -1,5 +1,4 @@
 === Theme SEO Core — Lite ===
-Contributors: your-wporg-username
 Tags: seo, schema, sitemap, open graph, robots, breadcrumbs
 Requires at least: 6.0
 Tested up to: 6.6
