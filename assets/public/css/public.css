@@ -1,0 +1,93 @@
+/* Theme SEO Core – Public Styles
+   Keep styles tiny and conflict-free; prefix with .tsc-
+-------------------------------------------------------------- */
+
+/* A11y helper */
+.tsc-visually-hidden {
+	position: absolute !important;
+	clip: rect(1px, 1px, 1px, 1px);
+	padding: 0 !important;
+	border: 0 !important;
+	height: 1px !important;
+	width: 1px !important;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+/* Breadcrumbs */
+.tsc-breadcrumbs {
+	font-size: 0.875rem;
+	line-height: 1.5;
+	margin: 0 0 1rem;
+}
+.tsc-breadcrumbs ol {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .5ch;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.tsc-breadcrumbs li {
+	display: inline-flex;
+	align-items: center;
+}
+.tsc-breadcrumbs li + li::before {
+	content: "/";
+	opacity: .6;
+	margin: 0 .5ch;
+}
+.tsc-breadcrumbs a {
+	text-decoration: none;
+}
+.tsc-breadcrumbs [aria-current="page"] {
+	font-weight: 600;
+}
+
+/* FAQ (schema-ready) */
+.tsc-faq {
+	margin: 1.5rem 0;
+}
+.tsc-faq .tsc-faq-item {
+	border-top: 1px solid rgba(0,0,0,.08);
+}
+.tsc-faq .tsc-faq-item:last-child {
+	border-bottom: 1px solid rgba(0,0,0,.08);
+}
+.tsc-faq button.tsc-faq-q {
+	all: unset;
+	display: block;
+	width: 100%;
+	cursor: pointer;
+	font-weight: 600;
+	padding: .75rem 0;
+}
+.tsc-faq .tsc-faq-a {
+	display: none;
+	padding: 0 0 .75rem;
+}
+.tsc-faq .is-open .tsc-faq-a {
+	display: block;
+}
+
+/* Utility: small note text (e.g., counters) */
+.tsc-muted {
+	color: rgba(0,0,0,.6);
+	font-size: .875rem;
+}
+
+/* Images: ensure dimensions reserve layout */
+.tsc-img-fit {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+/* Print: show URLs inside links for SEO handouts */
+@media print {
+	.tsc-breadcrumbs a::after {
+		content: " (" attr(href) ")";
+		font-weight: normal;
+	}
+}
+

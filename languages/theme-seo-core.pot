@@ -1,0 +1,238 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025 Your Name
+# This file is distributed under the same license as the Theme SEO Core plugin.
+# FIRST AUTHOR <you@example.com>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Theme SEO Core 1.0.0\n"
+"Report-Msgid-Bugs-To: support@example.com\n"
+"POT-Creation-Date: 2025-09-18 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: theme-seo-core\n"
+"X-Generator: Theme SEO Core POT seed\n"
+
+#: theme-seo-core.php:67
+#, php-format
+msgid "Theme SEO Core requires PHP %1$s or higher. You are running %2$s."
+msgstr ""
+
+#: theme-seo-core.php:86
+#, php-format
+msgid "Theme SEO Core requires WordPress %s or higher."
+msgstr ""
+
+#: theme-seo-core.php:154
+msgid ""
+"Theme SEO Core could not find its core classes. Please ensure the plugin "
+"files are complete and, if using Composer, run \"composer install\"."
+msgstr ""
+
+#: theme-seo-core.php:174
+#, php-format
+msgid "Theme SEO Core failed to initialize: %s"
+msgstr ""
+
+# -------------------------------------------------------------------
+# Common UI (anticipated strings used across admin/settings screens)
+# These seeds help translators; remove any you won't use later.
+# -------------------------------------------------------------------
+
+#: src/Admin/Menu.php:25
+msgid "SEO"
+msgstr ""
+
+#: src/Admin/Menu.php:26
+msgid "Theme SEO Core"
+msgstr ""
+
+#: src/Admin/SettingsRegistry.php:40
+msgid "Settings"
+msgstr ""
+
+#: src/Admin/SettingsRegistry.php:55
+msgid "Save Changes"
+msgstr ""
+
+#: src/Admin/SettingsRegistry.php:80
+msgid "General"
+msgstr ""
+
+#: src/Admin/SettingsRegistry.php:81
+msgid "Modules"
+msgstr ""
+
+#: src/Admin/SettingsRegistry.php:82
+msgid "Advanced"
+msgstr ""
+
+#: src/Modules/Titles/Module.php:30
+msgid "Titles"
+msgstr ""
+
+#: src/Modules/Meta/Module.php:30
+msgid "Meta"
+msgstr ""
+
+#: src/Modules/Canonical/Module.php:30
+msgid "Canonical URLs"
+msgstr ""
+
+#: src/Modules/OpenGraph/Module.php:30
+msgid "Open Graph"
+msgstr ""
+
+#: src/Modules/Schema/Module.php:30
+msgid "Schema"
+msgstr ""
+
+#: src/Modules/Sitemaps/Module.php:30
+msgid "Sitemaps"
+msgstr ""
+
+#: src/Modules/Robots/Module.php:30
+msgid "Robots.txt"
+msgstr ""
+
+#: src/Modules/Redirects/Module.php:30
+msgid "Redirects"
+msgstr ""
+
+#: src/Modules/ImageSEO/Module.php:30
+msgid "Image SEO"
+msgstr ""
+
+#: src/Modules/LinkManager/Module.php:30
+msgid "Link Manager"
+msgstr ""
+
+#: src/Modules/ContentAnalysis/Module.php:30
+msgid "Content Analysis"
+msgstr ""
+
+#: src/Modules/Breadcrumbs/Module.php:30
+msgid "Breadcrumbs"
+msgstr ""
+
+#: src/Modules/ThemeOptimization/Module.php:30
+msgid "Theme Optimization"
+msgstr ""
+
+#: src/Modules/XmlRpc/Module.php:30
+msgid "XML-RPC Controls"
+msgstr ""
+
+#: src/Admin/Views/settings-general.php:20
+msgid "Site-wide Settings"
+msgstr ""
+
+#: src/Admin/Views/settings-general.php:30
+msgid "Home Title Pattern"
+msgstr ""
+
+#: src/Admin/Views/settings-general.php:40
+msgid "Home Meta Description"
+msgstr ""
+
+#: src/Admin/Views/settings-general.php:55
+msgid "Separator"
+msgstr ""
+
+#: src/Admin/Views/settings-general.php:70
+msgid "Save"
+msgstr ""
+
+#: src/Admin/Views/settings-general.php:80
+msgid "Reset to Defaults"
+msgstr ""
+
+#: src/Admin/Views/settings-content.php:20
+msgid "Per-Content Settings"
+msgstr ""
+
+#: src/Admin/Views/metabox.php:25
+msgid "SEO Title"
+msgstr ""
+
+#: src/Admin/Views/metabox.php:35
+msgid "Meta Description"
+msgstr ""
+
+#: src/Admin/Views/metabox.php:45
+msgid "Focus Keyphrase"
+msgstr ""
+
+#: src/Admin/Views/metabox.php:55
+msgid "Noindex"
+msgstr ""
+
+#: src/Admin/Views/metabox.php:65
+msgid "Nofollow"
+msgstr ""
+
+#: src/Admin/Views/metabox.php:75
+msgid "Canonical URL"
+msgstr ""
+
+#: src/Admin/Notices.php:30
+msgid "Settings updated."
+msgstr ""
+
+#: src/Admin/Notices.php:40
+msgid "There was an error saving your settings."
+msgstr ""
+
+#: src/Modules/ThemeOptimization/CleanHead.php:40
+msgid "Clean up WordPress head output"
+msgstr ""
+
+#: src/Modules/ThemeOptimization/EnqueueManager.php:50
+msgid "Optimize script loading"
+msgstr ""
+
+#: src/Modules/ThemeOptimization/Preconnect.php:45
+msgid "Resource Hints"
+msgstr ""
+
+#: src/Modules/ThemeOptimization/Fonts.php:45
+msgid "Fonts Optimization"
+msgstr ""
+
+#: src/Modules/ThemeOptimization/Images.php:45
+msgid "Image Loading"
+msgstr ""
+
+#: src/Modules/Redirects/Admin.php:60
+msgid "Add Redirect"
+msgstr ""
+
+#: src/Modules/Redirects/Admin.php:70
+msgid "Source URL"
+msgstr ""
+
+#: src/Modules/Redirects/Admin.php:80
+msgid "Target URL"
+msgstr ""
+
+#: src/Modules/Redirects/Admin.php:90
+msgid "HTTP Status"
+msgstr ""
+
+#: src/Modules/Redirects/Admin.php:110
+msgid "Import"
+msgstr ""
+
+#: src/Modules/Redirects/Admin.php:120
+msgid "Export"
+msgstr ""
+
+# End of template.
+

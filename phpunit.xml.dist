@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.6/phpunit.xsd"
+    bootstrap="tests/bootstrap.php"
+    colors="true"
+    backupGlobals="false"
+    beStrictAboutCoversAnnotation="false"
+    beStrictAboutOutputDuringTests="true"
+    beStrictAboutTestsThatDoNotTestAnything="false"
+    beStrictAboutTodoAnnotatedTests="true"
+    convertDeprecationsToExceptions="false"
+    failOnRisky="true"
+    failOnWarning="true"
+>
+    <!-- Define your test suites -->
+    <testsuites>
+        <testsuite name="Unit">
+            <directory suffix="Test.php">tests/unit</directory>
+        </testsuite>
+        <!-- Add Integration tests later if you wire into WP test suite helpers
+        <testsuite name="Integration">
+            <directory suffix="Test.php">tests/integration</directory>
+        </testsuite>
+        -->
+    </testsuites>
+
+    <!-- Code coverage settings -->
+    <coverage cacheDirectory=".phpunit.cache/code-coverage"
+              processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <exclude>
+            <directory>vendor</directory>
+            <directory>node_modules</directory>
+            <directory>build</directory>
+            <directory>dist</directory>
+            <directory>tests</directory>
+            <file>theme-seo-core.php</file>
+        </exclude>
+        <report>
+            <html outputDirectory="build/coverage/html" lowUpperBound="50" highLowerBound="90"/>
+            <text outputFile="build/coverage/coverage.txt" showUncoveredFiles="false"/>
+            <clover outputFile="build/coverage/clover.xml"/>
+        </report>
+    </coverage>
+
+    <!-- Logging (CI friendly) -->
+    <logging>
+        <junit outputFile="build/junit.xml"/>
+    </logging>
+
+    <!-- Useful environment variables for the WP test suite bootstrap -->
+    <php>
+        <!-- Path to your local PHP binary (optional) -->
+        <env name="WP_PHP_BINARY" value="php"/>
+
+        <!-- If you use the official WordPress test suite, point this to your local checkout.
+             The tests/bootstrap.php can auto-discover this, but setting it here is handy. -->
+        <env name="WP_TESTS_DIR" value="/tmp/wordpress-tests-lib"/>
+
+        <!-- Database credentials for the WP test suite (if used by bootstrap) -->
+        <env name="WP_TESTS_DB_NAME" value="wordpress_test"/>
+        <env name="WP_TESTS_DB_USER" value="root"/>
+        <env name="WP_TESTS_DB_PASS" value=""/>
+        <env name="WP_TESTS_DB_HOST" value="127.0.0.1"/>
+        <env name="WP_TESTS_TABLE_PREFIX" value="wptests_"/>
+
+        <!-- Plugin paths passed to the bootstrap -->
+        <env name="TSC_PLUGIN_FILE" value="theme-seo-core.php"/>
+        <env name="TSC_PLUGIN_DIR" value="."/>
+    </php>
+</phpunit>
+

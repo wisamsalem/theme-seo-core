@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Theme SEO Core">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="32" fill="url(#g)"/>
+  <g fill="#fff">
+    <!-- Magnifier lens -->
+    <circle cx="116" cy="112" r="56" opacity=".95"/>
+    <!-- Handle -->
+    <rect x="162" y="158" width="20" height="64" rx="10" transform="rotate(45 172 190)" opacity=".95"/>
+    <!-- Up tick (SEO growth) -->
+    <path d="M64 156l32-28 20 18 44-40 28 24v20l-28-24-44 40-20-18-32 28z" opacity=".95"/>
+  </g>
+  <!-- TSC monogram -->
+  <text x="128" y="226" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,Ubuntu" font-size="28" fill="#eaf2ff" letter-spacing=".06em">TSC</text>
+</svg>
+

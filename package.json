@@ -1,0 +1,49 @@
+{
+  "name": "theme-seo-core",
+  "version": "1.0.0",
+  "description": "Build tooling for Theme SEO Core blocks and assets.",
+  "private": true,
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "start": "wp-scripts start ./src/blocks/**/index.{js,ts,tsx} ./src/admin/index.{js,ts,tsx} ./src/public/index.{js,ts,tsx}",
+    "build": "wp-scripts build ./src/blocks/**/index.{js,ts,tsx} ./src/admin/index.{js,ts,tsx} ./src/public/index.{js,ts,tsx}",
+    "format": "wp-scripts format-js",
+    "lint:js": "wp-scripts lint-js",
+    "lint:css": "stylelint \"src/**/*.scss\" \"src/**/*.css\"",
+    "i18n:make-pot": "wp-scripts i18n POT \"languages/theme-seo-core.pot\"",
+    "clean": "rimraf build *.asset.php"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^27.0.0",
+    "@wordpress/eslint-plugin": "^17.0.0",
+    "@wordpress/stylelint-config": "^21.0.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.0",
+    "postcss": "^8.4.47",
+    "postcss-preset-env": "^9.5.0",
+    "rimraf": "^6.0.1",
+    "sass": "^1.80.0",
+    "stylelint": "^16.8.0",
+    "stylelint-config-recommended": "^14.0.1",
+    "typescript": "^5.6.2"
+  },
+  "browserslist": [
+    "extends @wordpress/browserslist-config"
+  ],
+  "eslintConfig": {
+    "extends": [
+      "plugin:@wordpress/eslint-plugin/recommended"
+    ]
+  },
+  "stylelint": {
+    "extends": [
+      "@wordpress/stylelint-config",
+      "stylelint-config-recommended"
+    ]
+  },
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss"
+  ]
+}
+

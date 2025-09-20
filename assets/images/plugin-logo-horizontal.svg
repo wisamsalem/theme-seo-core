@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" role="img" aria-label="Theme SEO Core">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="20" fill="url(#g2)"/>
+  <g fill="#fff" transform="translate(0,0)">
+    <circle cx="60" cy="54" r="26" opacity=".95"/>
+    <rect x="86" y="80" width="12" height="40" rx="6" transform="rotate(45 92 100)" opacity=".95"/>
+    <path d="M28 86l15-13 10 9 22-20 14 12v10l-14-12-22 20-10-9-15 13z" opacity=".95"/>
+  </g>
+  <text x="140" y="76" font-family="system-ui,-apple-system,Segoe UI,Roboto,Ubuntu" font-weight="700" font-size="28" fill="#111827">
+    Theme <tspan fill="#3b82f6">SEO</tspan> Core
+  </text>
+</svg>
+

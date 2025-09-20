@@ -1,0 +1,69 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+._*
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.iml
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnp/
+.pnp.cjs
+
+# Build artifacts (JS/CSS, maps, asset manifests)
+build/
+dist/
+*.asset.php
+*.map
+
+# If you distribute to wp.org or without a build step, consider COMMITTING build assets.
+# Remove the above lines (build/, *.asset.php) when packaging for production release.
+
+# Composer
+/vendor/
+/composer.phar
+# Keep composer.lock committed for reproducible installs:
+# !composer.lock
+
+# Tests / Coverage / Cache
+.phpunit.cache/
+build/coverage/
+coverage/
+.php_cs.cache
+.php-cs-fixer.cache
+
+# Logs & temp
+*.log
+*.cache
+*.tmp
+*.swp
+*.swo
+
+# Environment / local config
+.env
+.env.*
+.envrc
+
+# OS/CI/Tools
+/.DS_Store?
+/*.orig
+/.editorconfig.local
+/.docker/
+/docker-compose*.yml
+
+# WordPress specific
+# Prevent accidental commits of local wp-content or uploads if developing inside WP
+wp-content/
+!wp-content/plugins/
+!wp-content/mu-plugins/
+uploads/
+

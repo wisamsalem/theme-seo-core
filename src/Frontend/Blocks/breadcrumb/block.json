@@ -1,0 +1,20 @@
+{
+  "apiVersion": 2,
+  "name": "tsc/breadcrumbs",
+  "title": "Breadcrumbs (TSC)",
+  "description": "Accessible breadcrumb trail with schema.org markup.",
+  "category": "widgets",
+  "icon": "menu",
+  "keywords": ["breadcrumb", "navigation", "seo"],
+  "textdomain": "theme-seo-core",
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "editorScript": "file:./edit.js"
+}
+

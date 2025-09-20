@@ -1,0 +1,33 @@
+{
+  "apiVersion": 2,
+  "name": "tsc/faq",
+  "title": "FAQ (TSC)",
+  "description": "Expandable FAQ section with JSON-LD schema output.",
+  "category": "widgets",
+  "icon": "editor-help",
+  "keywords": ["faq", "accordion", "schema", "seo"],
+  "textdomain": "theme-seo-core",
+  "attributes": {
+    "items": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object"
+      }
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "editorScript": "file:./edit.js"
+}
+

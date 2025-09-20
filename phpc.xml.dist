@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<ruleset name="Theme SEO Core Coding Standards">
+	<description>PHPCS rules for the Theme SEO Core plugin (WordPress + PHPCompatibility).</description>
+
+	<!-- Scan only PHP by default -->
+	<arg name="extensions" value="php"/>
+	<arg name="basepath" value="."/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+
+	<!-- Where to look -->
+	<file>./</file>
+
+	<!-- Ignore generated/third-party code -->
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/build/*</exclude-pattern>
+	<exclude-pattern>*/dist/*</exclude-pattern>
+	<exclude-pattern>*/assets/*</exclude-pattern>
+	<exclude-pattern>*/tests/fixtures/*</exclude-pattern>
+
+	<!-- WordPress Coding Standards -->
+	<rule ref="WordPress-Core"/>
+	<rule ref="WordPress-Extra"/>
+	<rule ref="WordPress-Docs"/>
+
+	<!-- PHP Compatibility for WordPress (adjust version if needed) -->
+	<rule ref="PHPCompatibilityWP">
+		<!-- Minimum supported PHP is 7.4, test up to latest you support -->
+		<config name="testVersion" value="7.4-8.3"/>
+	</rule>
+
+	<!-- Configure WP i18n text domain -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="theme-seo-core"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Common, opinionated tweaks -->
+	<!-- Prefer non-Yoda conditions (disable Yoda enforcement) -->
+	<rule ref="WordPress.PHP.YodaConditions">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Keep lines readable; ignore comments and long URLs -->
+	<rule ref="Generic.Files.LineLength">
+		<properties>
+			<property name="lineLimit" value="120"/>
+			<property name="absoluteLineLimit" value="0"/>
+			<property name="ignoreComments" value="true"/>
+		</properties>
+	</rule>
+
+	<!-- Enforce strict comparisons where practical, but allow WordPress globals/filters patterns -->
+	<rule ref="WordPress.PHP.StrictComparisons"/>
+	<rule ref="WordPress.PHP.StrictInArray"/>
+
+	<!-- Docblocks required for classes/methods; allow short descriptions -->
+	<rule ref="Squiz.Commenting.FunctionComment"/>
+	<rule ref="Squiz.Commenting.ClassComment"/>
+
+	<!-- Formatting: tabs preferred in PHP files (WordPress style) -->
+	<config name="tab_width" value="4"/>
+
+	<!-- Report summary + full report -->
+	<arg value="ps"/>
+
+	<!-- You can whitelist additional text domains (for integrations) like:
+	     <element value="woocommerce"/> inside the text_domain array above. -->
+</ruleset>
+

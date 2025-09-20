@@ -1,0 +1,206 @@
+/* Theme SEO Core – Admin Styles
+   Scope everything with .tsc-admin to avoid collisions.
+-------------------------------------------------------------- */
+
+:root {
+	--tsc-gap: 16px;
+	--tsc-radius: 12px;
+	--tsc-border: 1px solid #e0e0e0;
+	--tsc-bg: #fff;
+	--tsc-muted: #6b7280;
+	--tsc-accent: #3858e9; /* matches WP blue-ish */
+}
+
+.tsc-admin * { box-sizing: border-box; }
+
+.tsc-admin .tsc-wrap {
+	background: var(--tsc-bg);
+	border: var(--tsc-border);
+	border-radius: var(--tsc-radius);
+	padding: 20px;
+	margin-top: 12px;
+}
+
+.tsc-admin h1.huge,
+.tsc-admin .tsc-title {
+	margin: 0 0 12px;
+	font-size: 24px;
+	line-height: 1.25;
+}
+
+.tsc-admin p.description {
+	color: var(--tsc-muted);
+	margin-top: 6px;
+}
+
+/* Grid for settings sections */
+.tsc-admin .tsc-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--tsc-gap);
+}
+@media (min-width: 960px) {
+	.tsc-admin .tsc-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+/* Card */
+.tsc-admin .tsc-card {
+	border: var(--tsc-border);
+	border-radius: var(--tsc-radius);
+	background: #fff;
+	padding: 16px;
+}
+
+.tsc-admin .tsc-card h2 {
+	margin: 0 0 8px;
+	font-size: 16px;
+}
+
+/* Field rows */
+.tsc-admin .tsc-field {
+	display: grid;
+	grid-template-columns: 200px 1fr;
+	gap: 12px;
+	align-items: center;
+	padding: 12px 0;
+	border-top: var(--tsc-border);
+}
+.tsc-admin .tsc-field:first-child { border-top: 0; }
+
+.tsc-admin .tsc-field label {
+	font-weight: 600;
+}
+
+/* Inputs */
+.tsc-admin input[type="text"],
+.tsc-admin input[type="url"],
+.tsc-admin textarea,
+.tsc-admin select {
+	width: 100%;
+	max-width: 640px;
+}
+
+.tsc-admin .tsc-help {
+	color: var(--tsc-muted);
+	font-size: 12px;
+	margin-top: 6px;
+}
+
+/* Toggle switch */
+.tsc-toggle {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	width: 46px;
+	height: 26px;
+	background: #c7cbd1;
+	border-radius: 999px;
+	cursor: pointer;
+	transition: background .2s ease;
+}
+.tsc-toggle input {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+}
+.tsc-toggle .tsc-knob {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 20px;
+	height: 20px;
+	background: #fff;
+	border-radius: 50%;
+	transition: transform .2s ease;
+	box-shadow: 0 1px 2px rgba(0,0,0,.08);
+}
+.tsc-toggle input:checked + .tsc-knob {
+	transform: translateX(20px);
+}
+.tsc-toggle input:checked ~ .tsc-bg {
+	background: var(--tsc-accent);
+}
+.tsc-toggle .tsc-bg {
+	position: absolute;
+	inset: 0;
+	border-radius: 999px;
+	background: #c7cbd1;
+	transition: background .2s ease;
+}
+
+/* Module list */
+.tsc-modules {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 12px;
+}
+@media (min-width: 782px) {
+	.tsc-modules { grid-template-columns: 1fr 1fr; }
+}
+.tsc-module {
+	border: var(--tsc-border);
+	border-radius: var(--tsc-radius);
+	padding: 14px;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 8px;
+	align-items: center;
+}
+.tsc-module .tsc-module-desc {
+	grid-column: 1 / -1;
+	color: var(--tsc-muted);
+	font-size: 12px;
+}
+
+/* Inline badges */
+.tsc-badge {
+	display: inline-block;
+	border-radius: 999px;
+	padding: 2px 8px;
+	font-size: 11px;
+	border: 1px solid #e5e7eb;
+	background: #f9fafb;
+	color: #374151;
+}
+
+/* Notices inside plugin page */
+.tsc-admin .notice {
+	margin: 0 0 12px;
+}
+
+/* List table (e.g., redirects) */
+.tsc-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.tsc-table th, .tsc-table td {
+	padding: 10px;
+	border-bottom: 1px solid #eee;
+	text-align: left;
+}
+.tsc-table th {
+	background: #fafafa;
+	font-weight: 600;
+}
+
+/* Character counter */
+.tsc-counter {
+	font-size: 12px;
+	color: var(--tsc-muted);
+	float: right;
+}
+
+/* Sticky footer actions */
+.tsc-actions {
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+	padding-top: 12px;
+	border-top: var(--tsc-border);
+	position: sticky;
+	bottom: 0;
+	background: #fff;
+}
+
