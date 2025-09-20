@@ -8,22 +8,18 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
-Core SEO toolkit: titles, meta, schema, sitemaps, robots, breadcrumbs, image
-alt text, and theme head cleanup. Upgrade for redirects, internal linking,
-content analysis, and integrations.
+No bloat. No nags. Titles, Meta, Canonical, Open Graph, Robots, Breadcrumbs, basic Schema. Optional sitemaps enhancement.
 
 == Description ==
 Theme SEO Core — Lite gives you the essentials:
 * Titles & Meta, Canonical, Open Graph, Twitter
-* JSON-LD Schema (Article, Organization, WebSite, Breadcrumb, FAQ)
-* Sitemaps (/sitemap.xml) and Robots.txt editor
+* JSON-LD Schema (WebSite, Organization/Person, WebPage, Article, BreadcrumbList)
+* Sitemaps (optional, off by default) and Robots.txt editor
 * Breadcrumbs block/shortcode
-* Image SEO (alt text, filename cleanup)
 * Theme Optimization (clean head, preconnect)
 * XML-RPC controls
 
-**Upgrade for more:** Redirects manager, Link suggestions, Content Analysis,
-WooCommerce/ACF integrations, and more.
+**Upgrade for more:** Redirects manager, Product/LocalBusiness schema, FAQ UI, SearchBox, WooCommerce/ACF integrations, and more.
 
 == Installation ==
 1. Upload to `/wp-content/plugins/theme-seo-core-lite/`.
@@ -32,7 +28,7 @@ WooCommerce/ACF integrations, and more.
 
 == Screenshots ==
 1. Settings overview
-2. Sitemaps and robots
+2. Optional sitemaps toggle
 3. Breadcrumbs block
 
 == Changelog ==

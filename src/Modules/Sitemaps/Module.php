@@ -18,8 +18,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  *   /sitemap-images-1.xml             → images from recent posts
  *
  * Query vars:
- *   tsc_sitemap = index|posts|taxonomies|authors|images
+ *   tsc_sitemap = index|posts|taxonomies|authors|images|xsl
  *   tsc_page    = 1..N
+ *
+ * NOTE: This module is *optional* and defaults OFF. Hooks are only registered
+ *       when $this->enabled() is true (see BaseModule::enabled()).
  */
 class Module extends BaseModule {
 
@@ -33,6 +36,11 @@ class Module extends BaseModule {
 	public function register( \ThemeSeoCore\Container\Container $container ): void {
 		parent::register( $container );
 
+		// If the module is disabled (default for fresh installs), don't wire any hooks.
+		if ( ! $this->enabled() ) {
+			return;
+		}
+
 		$this->router = new Router();
 
 		$this->register_hooks();
@@ -40,8 +48,8 @@ class Module extends BaseModule {
 
 	protected function hooks(): array {
 		return [
-			'init'           => 'on_init',
-			'query_vars'     => [ [ $this, 'query_vars' ], 10, 1, 'filter' ],
+			'init'              => 'on_init',
+			'query_vars'        => [ [ $this, 'query_vars' ], 10, 1, 'filter' ],
 			'template_redirect' => 'maybe_render',
 		];
 	}
@@ -75,12 +83,12 @@ class Module extends BaseModule {
 
 		switch ( $type ) {
 			case 'index':
-				$builder = new IndexBuilder();
-				$sitemaps = $builder->index();
+				$builder    = new IndexBuilder();
+				$sitemaps   = $builder->index();
 				$stylesheet = add_query_arg( array( 'tsc_sitemap' => 'xsl' ), home_url( '/' ) );
-				$view = __DIR__ . '/Views/sitemap-xml.php';
-				$kind = 'index';
-				$entries = $sitemaps;
+				$view       = __DIR__ . '/Views/sitemap-xml.php';
+				$kind       = 'index';
+				$entries    = $sitemaps;
 				include $view;
 				exit;
 
@@ -110,15 +118,15 @@ class Module extends BaseModule {
 				exit;
 		}
 
-		$chunk = $provider->page( $page );
-		$stylesheet = add_query_arg( array( 'tsc_sitemap' => 'xsl' ), home_url( '/' ) );
-		$view = __DIR__ . '/Views/sitemap-xml.php';
-		$kind = 'urlset';
-		$entries = $chunk['entries'];
-		$total_pages = $chunk['total_pages'];
-		$current_page = $chunk['current_page'];
+		$chunk         = $provider->page( $page );
+		$stylesheet    = add_query_arg( array( 'tsc_sitemap' => 'xsl' ), home_url( '/' ) );
+		$view          = __DIR__ . '/Views/sitemap-xml.php';
+		$kind          = 'urlset';
+		$entries       = $chunk['entries'];
+		$total_pages   = $chunk['total_pages'];
+		$current_page  = $chunk['current_page'];
 
-		// If page out of range, 404
+		// If page out of range, 404.
 		if ( $total_pages > 0 && $current_page > $total_pages ) {
 			status_header( 404 );
 			exit;

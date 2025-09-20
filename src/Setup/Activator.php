@@ -1,6 +1,8 @@
 <?php
 namespace ThemeSeoCore\Setup;
 
+use ThemeSeoCore\Security\Capabilities;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -31,16 +33,65 @@ class Activator {
 	public static function activate_site( int $site_id ): void {
 		if ( is_multisite() ) switch_to_blog( $site_id );
 
-		self::create_options();
+		self::ensure_options();
+		self::ensure_caps();
 		self::create_tables();
 		self::schedule_events();
+
+		// New: make sure rewrites are fresh (useful if modules add rules later).
+		flush_rewrite_rules();
 
 		if ( is_multisite() ) restore_current_blog();
 	}
 
-	protected static function create_options(): void {
-		if ( false === get_option( 'tsc_settings' ) ) {
-			add_option( 'tsc_settings', [ 'separator' => '–' ] );
+	/**
+	 * Ensure the main options array exists and has sane defaults.
+	 * - Keep backward-compat with old 'separator' key.
+	 * - Default-off modules: sitemaps.
+	 * - Compatibility override default OFF.
+	 */
+	protected static function ensure_options(): void {
+		$opts = get_option( 'tsc_settings', [] );
+		if ( ! is_array( $opts ) ) {
+			$opts = [];
+		}
+
+		// Title separator: prefer 'sep', fallback to legacy 'separator', then '–'.
+		$sep = $opts['sep'] ?? ( $opts['separator'] ?? '–' );
+		$opts['sep']       = is_string( $sep ) ? mb_substr( $sep, 0, 3 ) : '–';
+		// Keep legacy key in place if it was used previously (harmless duplicate).
+		if ( isset( $opts['separator'] ) && ! is_string( $opts['separator'] ) ) {
+			unset( $opts['separator'] );
+		}
+		if ( ! isset( $opts['separator'] ) ) {
+			$opts['separator'] = $opts['sep'];
+		}
+
+		// Modules container.
+		if ( ! isset( $opts['modules'] ) || ! is_array( $opts['modules'] ) ) {
+			$opts['modules'] = [];
+		}
+		// Default-OFF: sitemaps (opt-in).
+		if ( ! array_key_exists( 'sitemaps', $opts['modules'] ) ) {
+			$opts['modules']['sitemaps'] = 0;
+		}
+
+		// Compatibility override (off by default).
+		if ( ! isset( $opts['compatibility_override'] ) ) {
+			$opts['compatibility_override'] = 0;
+		}
+
+		update_option( 'tsc_settings', $opts );
+	}
+
+	/**
+	 * Grant baseline capabilities to administrator.
+	 */
+	protected static function ensure_caps(): void {
+		$cap  = Capabilities::manage_seo(); // e.g., 'manage_tsc_seo'
+		$role = get_role( 'administrator' );
+		if ( $role && ! $role->has_cap( $cap ) ) {
+			$role->add_cap( $cap );
 		}
 	}
 
@@ -96,3 +147,4 @@ class Activator {
 		}
 	}
 }
+

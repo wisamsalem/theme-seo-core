@@ -17,6 +17,11 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+/** Ensure is_plugin_active() is available before use */
+if ( ! function_exists( 'is_plugin_active' ) ) {
+	require_once ABSPATH . 'wp-admin/includes/plugin.php';
+}
+
 /** ------------------------------------------------------------------------
  * Prevent conflicts: auto-deactivate Lite if Pro is active
  * --------------------------------------------------------------------- */
@@ -110,7 +115,7 @@ add_action( 'plugins_loaded', static function () {
 		return;
 	}
 	try {
-		$plugin = new ThemeSeoCore\Plugin();
+		$plugin = new \ThemeSeoCore\Plugin();
 		if ( method_exists( $plugin, 'init' ) ) {
 			$plugin->init([
 				'version'   => TSC_VERSION,
